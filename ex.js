@@ -1,17 +1,20 @@
-const http = require('http');
-const server = http.createServer((req, res)=> {
-    if (req.url === '/') {
-        res.write("HELLO WORLD"); 
-        res.end(); 
-    }
-    //second route
-    if (req.url === "/api/courses") {
-        res.write(JSON.stringify([1,2,3]));
-        res.write("This is a list of offerings at BTHS"); 
-        res.end(); 
-    }
+const express = require('express');
+const app = express(); 
+
+app.get('/', (req,res)=> {
+    res.send('Hello there');
 });
 
-server.listen(3000); //localhost:3000
-console.log("Listening on port 3000 ..."); 
+const courses = [
+    { id: 1, name:'Web Development'},
+    { id: 2, name: 'IT'},
+    { id: 3, name: 'Cybersecurity'}
+]; 
 
+app.get('/api/courses', (req,res)=> {
+     res.send(courses); 
+})
+
+app.listen(3000, () => {
+    console.log("Listening on port 3000 ..."); 
+}); 
