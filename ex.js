@@ -26,10 +26,20 @@ app.post('/api/courses', (req,res) => {
         courses.push(course); 
         res.send(courses); 
     }
+    else {
+        res.status(400).send("Name is required and with a minimum of 4 characters"); 
+    }
     
+})
+
+//PUT REQUESTS
+app.put("/api/courses/:id", (req, res) => {
+    const course = {
+        id: req.body.id,
+        name: req.body.name
+    }
 })
 
 app.listen(3000, () => {
     console.log("Listening on port 3000 ..."); 
 }); 
-
